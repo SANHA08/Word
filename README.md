@@ -68,7 +68,18 @@
 
 ----
 ## < 터널링 현상 >
--
+- 터널링: 충돌 처리가 필요한 게임 오브젝트가 다른 충돌체를 뚫고 지나가는 오류
+
+즉, 유니티의 물리엔진은 매 프레임마다 객체의 위치를 갱신 / 충돌여부를 계산 => 이때 이동속도가 너무 빠르면 객체가 충돌체를 한프레임에서 완전히 건너뛰어 충돌(X)
+
+- 해결방법
+  1) 연속 충돌 검사(CCD)설정: 객체의 Rigidbody 컴포넌트에서 Collision Detection설정을 Continuous / Continuous Dynamic 둘중 하나로 변경
+
+  2) 물리 업데이트 빈도 증가: 프레임 드랍이 심할때 더 자주 발생, ProJect Settings > Time에서 Fixd Timestep 값을 더 작게 줄여 물리 연산을 자주 수행하게 함
+
+  3) 최대 속도 제한: 오브젝트에 Rigidbody.maxAngularVeloctiy / velocity 제한을 걸어 지나치게 빠른속도로 이동하는것을 막음
+
+  4) 충돌체 두께 증가: Collider의 두께를 증가 시키거나 레이캐스트를 보조적으로 활용   
 
 
 
